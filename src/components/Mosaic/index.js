@@ -1,9 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Grid, Row, Col } from 'react-flexbox-grid';
 import ReactPlayer from 'react-player';
 import { Parallax } from 'react-parallax';
 import { Fade } from 'react-reveal';
 import Image1 from '../../assets/images/graffiti.jpg';
+import Logo from '../../assets/video/logo.mp4';
 
 export const MainWrapper = styled.div`
   max-width: 100%;
@@ -62,14 +64,6 @@ const Block4 = styled.div`
   height: 45vh;
 `;
 
-const TextWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  height: 100%;
-`;
-
 const Panel = styled.div`
   display: flex;
   align-items: center;
@@ -112,45 +106,81 @@ const MainIntro = styled.h1`
   }
 `;
 
+const Column = styled(Col)`
+  width: 100%;
+  height: 50vh;
+  background: blue;
+`;
+
 const Mosaic = () => (
-  <MainWrapper>
+  <Grid>
+    <Row around="xs">
+      <Column xs={6}>
+        <Fade>
+        <ReactPlayer
+        url={Logo}
+        loop={false}
+        playing
+        style={{ height: '100%', width: '100%'}}
+        />
+        </Fade>
+      </Column>
+      <Column xs={6}>
+        <Panel>
+        <Inner>
+        <MainIntro>Who are we<span>?</span></MainIntro>
+        <Paragraph>Millenials is an active online community curated to help creators of any type be better versions of themselves.
+        It was created to expand our limits as creators, help push each other, share techniques, receive honest feedback on projects,
+        network and a space for people to collaborate with each other.
+        </Paragraph>
+        </Inner>
+        </Panel>
+      </Column>
+    </Row>
     {/*<Block1>*/}
       {/*<Fade>*/}
         {/*<ReactPlayer*/}
-          {/*url={Video}*/}
+          {/*url={Logo}*/}
           {/*loop={false}*/}
           {/*playing*/}
           {/*style={{ height: '100%', weight: '100%'}}*/}
         {/*/>*/}
       {/*</Fade>*/}
     {/*</Block1>*/}
-    <Block1>
-      <Parallax
-        blur={0}
-        bgImage={Image1}
-        bgImageAlt="Millennial Generation"
-        strength={300}
-        style={{ height: '100%'}}
-      >
-        <Panel>
-        </Panel>
-      </Parallax>
-    </Block1>
-    <Block2>
-      <Panel>
-        <Inner>
-          <MainIntro>Who are we<span>?</span></MainIntro>
-          <Paragraph>Millenials is an active online community curated to help creators of any type be better versions of themselves.
-            It was created to expand our limits as creators, help push each other, share techniques, receive honest feedback on projects,
-            network and a space for people to collaborate with each other.
-          </Paragraph>
-        </Inner>
-      </Panel>
-    </Block2>
-    <Block3 />
-    <Block4>
-
-    </Block4>
-  </MainWrapper>
+    {/*<Block2>*/}
+      {/*<Panel>*/}
+        {/*<Inner>*/}
+          {/*<MainIntro>Who are we<span>?</span></MainIntro>*/}
+          {/*<Paragraph>Millenials is an active online community curated to help creators of any type be better versions of themselves.*/}
+            {/*It was created to expand our limits as creators, help push each other, share techniques, receive honest feedback on projects,*/}
+            {/*network and a space for people to collaborate with each other.*/}
+          {/*</Paragraph>*/}
+        {/*</Inner>*/}
+      {/*</Panel>*/}
+    {/*</Block2>*/}
+    {/*<Block3>*/}
+      {/*<Panel>*/}
+        {/*<Inner>*/}
+          {/*<MainIntro>How do i join<span>?</span></MainIntro>*/}
+          {/*<Paragraph>*/}
+            {/*It was created to expand our limits as creators, help push each other, share techniques, receive honest feedback on projects,*/}
+            {/*network and a space for people to collaborate with each other.*/}
+          {/*</Paragraph>*/}
+        {/*</Inner>*/}
+      {/*</Panel>*/}
+    {/*</Block3>*/}
+    {/*<Block4>*/}
+      {/*<Parallax*/}
+        {/*blur={0}*/}
+        {/*bgImage={Image1}*/}
+        {/*bgImageAlt="Millennial Generation"*/}
+        {/*strength={300}*/}
+        {/*style={{ height: '100%'}}*/}
+      {/*>*/}
+        {/*<Panel>*/}
+        {/*</Panel>*/}
+      {/*</Parallax>*/}
+    {/*</Block4>*/}
+  </Grid>
 );
 export default Mosaic;

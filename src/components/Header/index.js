@@ -1,43 +1,23 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { HeaderWrapper } from '../MainWrapper';
+import { Row, Col } from 'react-flexbox-grid';
 import Logo from '../../assets/logo/M-Logo2-stroke-300dpi.png';
-
-const LinkWrapper = styled.li`
-      display: flex;
-      align-items: center; 
-    
-    > a {
-      display: flex;
-      align-items: center;
-      color: #fff;
-      padding: 15px 30px;
-      text-decoration: none;
-      width: 100%;
-      font-weight: normal;
-      font-size: 16px;
-           
-      &:hover {
-        color: black;
-        background: white;
-      }
-    }
-`;
+import Hamburger from './Hamburger'
 
 const Button = styled.li`
-display: flex;
-      align-items: center;
-      justify-content: center;
-  background: transparent;
-  color:#fff;
-  border:none;
-  position: relative;
-  padding: 12px 0;
-  margin: 0 22px;
-  cursor:pointer;
-  transition:200ms ease all;
-  outline:none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    color:#fff;
+    border:none;
+    position: relative;
+    padding: 12px 0;
+    margin: 0 22px;
+    cursor:pointer;
+    transition:200ms ease all;
+    outline:none;
 
     > a {
       color: #fff;
@@ -48,26 +28,30 @@ display: flex;
     }
 
  :after{
-  content:'';
-  position:absolute;
-  top:0;
-  right:0;
-  height:2px;
-  width:0;
-  background: #fff;
-  transition:200ms ease all;
-}
- :after{
-  right:inherit;
-  top:inherit;
-  left:0;
-  bottom:0;
-}
-:hover:before, :hover:after{
-  width:100%;
-  transition:200ms ease all;
-}
-
+    content:'';
+    position:absolute;
+    top:0;
+    right:0;
+    height:2px;
+    width:0;
+    background: #fff;
+    transition:200ms ease all;
+  }
+   :after{
+    right:inherit;
+    top:inherit;
+    left:0;
+    bottom:0;
+  }
+  
+  :hover:before, :hover:after{
+    width:100%;
+    transition:200ms ease all;
+  }
+  
+    ${props => props.theme.breakpoints.maxTablet} {
+       padding: 12px 24px;
+  }
 `;
 
 const Image = styled.img`
@@ -76,23 +60,73 @@ const Image = styled.img`
 `;
 
 export const ListWrapper = styled.ul`
-  display: inline-flex;
-  margin-right: 10%;
+  display: flex;
+    
+  ${props => props.theme.breakpoints.maxTablet} {
+    flex-direction: column;
+    margin-top: 5%;
+    display: ${props => props.toggle ? 'flex' : 'none'};
+  }
+`;
+
+export const HeaderWrapper = styled(Row)`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 888;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  height: 80px;
+  background: rgba(0,0,0,0.5);
+  color: white;
+  box-shadow: 0 1px 1px 0 rgba(0,0,0,0.17);
+  padding: 0 18px;
+  
+  ${props => props.theme.breakpoints.maxTablet} {
+    height: ${props => props.toggle ? 'auto' : '80px'};
+    background: #000;
+  }
+`;
+
+const HamburgerCol = styled(Col)`
+    ${props => props.theme.breakpoints.maxTablet} {
+    //display: none;
+  }
 `;
 
 export default class Header extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      menu: false,
+    };
+    this.toggle = this.toggle.bind(this);
+  }
+  toggle() {
+    this.setState({menu: !this.state.menu});
+  }
   render() {
     return (
-      <HeaderWrapper>
-        <Image src={Logo} />
-        <ListWrapper>
-          <Button><Link to='/'>Home</Link></Button>
-          <Button><Link to='/'>Join Millennials</Link></Button>
-          <Button><Link to='/'>Podcast</Link></Button>
-          <Button><Link to='/'>Shop</Link></Button>
-          <Button><Link to='/'>Contact</Link></Button>
-        </ListWrapper>
-      </HeaderWrapper>
+        <HeaderWrapper between='xs' toggle={this.state.menu} >
+          <Col center='xs' xs={4}>
+            <Image src={Logo} />
+          </Col>
+          <HamburgerCol center='xs' xs={2}>
+            <Hamburger menu={this.state.menu} toggleMenu={this.toggle} />
+          </HamburgerCol>
+          <Col xs={12} md={4}>
+            <ListWrapper toggle={this.state.menu}>
+              <Button onClick={() => this.toggle()}><Link to='/'>Home</Link></Button>
+              <Button onClick={() => this.toggle()}><Link to='/join'>Join Millennials</Link></Button>
+              <Button onClick={() => this.toggle()}><Link to='/podcast'>Podcast</Link></Button>
+              <Button onClick={() => this.toggle()}><Link to='/'>Shop</Link></Button>
+              <Button onClick={() => this.toggle()}><Link to='/contact'>Contact</Link></Button>
+            </ListWrapper>
+          </Col>
+        </HeaderWrapper>
     );
   }
 }

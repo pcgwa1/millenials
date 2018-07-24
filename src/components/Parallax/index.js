@@ -8,23 +8,19 @@ const TextWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
-  height: 100vh;
+  margin-top: 15%;
 `;
 
-const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  background: rgba(0,0,0, 1);
-  width: 100%;
-  height: 100px;
+const ParallaxIntro = styled(Parallax)`
+  max-width: 100%;
+  height: 95vh;
+  ${props => props.theme.breakpoints.maxTablet} {
+    height: 50vh;
+  }
 `;
-
 const ParallaxComponent = () => (
   <div>
-    <Parallax
+    <ParallaxIntro
       blur={10}
       bgImage={Image1}
       bgImageAlt="Millennial Generation"
@@ -33,8 +29,7 @@ const ParallaxComponent = () => (
       <TextWrapper>
         <Typist />
       </TextWrapper>
-    </Parallax>
-    <Wrapper />
+    </ParallaxIntro>
   </div>
 );
 export default ParallaxComponent;
