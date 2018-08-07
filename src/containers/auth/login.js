@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import fire from '../../firebaseConfig';
-import TextFields from '../../components/TextField/index';
-import FlatButton from '../../components/Buttons/FlatPlain';
-import PageContainer from '../../components/PageContainer';
+
 
 export const Form = styled.form`
   height: 100%;
@@ -58,10 +56,7 @@ class Login extends Component {
     return (
       <PageContainer>
         <Form>
-            <TextFields name='email' label='Enter your email address' type='email' onChangeHandler={this.handleChange} value={this.state.email} />
-            <TextFields name='password' label='Enter password' type='password' onChangeHandler={this.handleChange} value={this.state.password} />
-            <FlatButton name='Login' type='button' handleClick={this.login} />
-            <LinkWrapper to='/reset'>Reset Password</LinkWrapper>
+
         </Form>
       </PageContainer>
     );

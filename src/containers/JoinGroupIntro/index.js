@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import { Row, Col } from 'react-flexbox-grid';
-import { Parallax } from 'react-parallax';
 import { DefaultPlayer as Video } from 'react-html5video';
 import 'react-html5video/dist/styles.css';
 import Logo from '../../assets/video/logo.mp4';
@@ -39,7 +38,7 @@ const Panel = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  height: 50vh;
+  //height: 50vh;
   background: transparent;
   width: 100%;
 `;
@@ -84,41 +83,6 @@ const MainIntro = styled.h1`
     ${props => props.theme.breakpoints.maxTablet} {
      font-size: 20px;
   }
-`;
-
-const PanelParallax = styled(Parallax)`
-  width: 50vw;
-  height: 50vh;
-  
-  ${props => props.theme.breakpoints.maxTablet} {
-    width: 100vw;
-    height: 40vh;
-  }
-`;
-
-const Step2Title = styled.h1`
-  font-family: ${props => props.theme.fonts.openSansSemiBold};
-  font-weight: 800;
-  font-size: 48px;
-  color: white;
-  padding: 0;
-  margin: 22px 0;
-  text-transform: uppercase;
-  
-  > span {
-    color: #ffffff;
-    text-shadow: 4px 4px #000;
-  }
-`;
-
-const InnerStep = styled.div`
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  flex-direction: column;
-  background: rgba(0,0,0,0.75);
-  width: 40%;
-   box-shadow: 2px 4px 6px 1px rgba( 0, 0, 0, 0.5);
 `;
 
 const Button = styled(Link)`
@@ -170,6 +134,17 @@ class Home extends PureComponent {
         <Column center='xs' xs={12} >
           <Panel>
             <Inner>
+              <MainIntro>STEP 1: IMPORTANT NOTICE</MainIntro>
+              <Paragraph>
+                ****IMPORTANT: WHEN YOU COMPLETE THE FORM, PLEASE CHECK YOUR EMAIL ASAP! THE EMAIL SUBJECT
+                WILL BE, 'MILLENNIALS SIGN UP, PLEASE CONFIRM THE SUBSCRIPTION'. MAKE SURE TO CLICK CONFIRM!!!
+              </Paragraph>
+            </Inner>
+          </Panel>
+        </Column>
+        <ColumnBlack center='xs' xs={12} >
+          <Panel>
+            <Inner>
               <MainIntro>STEP 2: FILL OUT THE CREATOR FORM</MainIntro>
               <Paragraph>
                 Millenials is an active online community curated to help creators of any type be better versions of themselves.
@@ -182,7 +157,7 @@ class Home extends PureComponent {
               Join Millennials form
             </Button>
           </Panel>
-        </Column>
+        </ColumnBlack>
       </FullRow>
     );
   }

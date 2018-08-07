@@ -11,6 +11,7 @@ import 'firebase/auth';
 import 'firebase/database';
 import firebaseInit from './firebaseConfig';
 import app from './reducer';
+import profile from './containers/Profile/reducer';
 
 const persistConfig = {
   key: 'root',
@@ -32,6 +33,7 @@ export default (initialState = {}) => {
     ),
     form: reduxFormReducer,
     app,
+    profile,
   });
 
   const persistedReducer = persistReducer(persistConfig, rootReducer);

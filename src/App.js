@@ -1,32 +1,53 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
 import asyncComponent from './components/AsyncComponent';
-import Grid from './components/GridContainer';
 import Header from './components/Header';
-// import Header from './components/Menu';
 import Footer from './components/Footer';
+import setUserData from './actions';
+import firebase from './firebaseConfig';
+
 const Home = asyncComponent(() => import('./containers/Home'));
 const Podcast = asyncComponent(() => import('./containers/Podcast'));
-const JoinGroup = asyncComponent(() => import('./containers/JoinGroup'));
+const Profile = asyncComponent(() => import('./containers/Profile'));
 const JoinGroupIntro = asyncComponent(() => import('./containers/JoinGroupIntro'));
-const SignUp = asyncComponent(() => import('./containers/SignUp'));
 const RegisterProfile = asyncComponent(() => import('./containers/RegisterProfile'));
 const Contact = asyncComponent(() => import('./containers/Contact'));
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+    this.authListener = this.authListener.bind(this);
+  }
+
+  componentDidMount() {
+    const { setUserDataToState } = this.props;
+    this.authListener(setUserDataToState);
+  }
+
+  authListener(setUserDataToState) {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        setUserDataToState(user.uid);
+      } else {
+        setUserDataToState(null);
+      }
+    });
+  }
   render() {
+    const { user } = this.props;
     return (
       <div>
         <Router>
           <div>
-            <Header />
+            <Header user={user} />
             <Switch>
               <Route exact path='/' component={Home} />
-              <Route exact path='/join/og' component={JoinGroup} />
               <Route exact path='/join' component={JoinGroupIntro} />
-              <Route exact path='/signup/og' component={SignUp} />
               <Route exact path='/signup' component={RegisterProfile} />
+              <Route exact path='/profile' component={() => <Profile user={user} />} />
               <Route exact path='/podcast' component={Podcast} />
               <Route exact path='/contact' component={Contact} />
             </Switch>
@@ -38,4 +59,16 @@ class App extends Component {
   }
 }
 
-export default App;
+export function mapStateToProps(state) {
+  return {
+    user: state.app.user,
+  };
+}
+
+export function mapDispatchToProps(dispatch) {
+  return {
+    setUserDataToState: data => dispatch(setUserData(data)),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

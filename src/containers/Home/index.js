@@ -2,9 +2,7 @@ import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import { Row, Col } from 'react-flexbox-grid';
 import { Parallax } from 'react-parallax';
-import { FullWidthRow } from '../../components/GridContainer';
 import ParallaxIntro from '../../components/Parallax';
-import Mosaic from '../../components/Mosaic';
 import { DefaultPlayer as Video } from 'react-html5video';
 import 'react-html5video/dist/styles.css';
 import Logo from '../../assets/video/logo.mp4';
@@ -60,6 +58,11 @@ const Paragraph = styled.p`
   text-align: center;
   padding: 0 15%;
   font-weight: 600;
+  
+  ${props => props.theme.breakpoints.maxTablet} {
+    text-align: justify;
+    padding: 0 5%;
+  }
 `;
 
 const MainIntro = styled.h1`

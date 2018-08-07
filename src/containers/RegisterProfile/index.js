@@ -20,6 +20,10 @@ const PageHeaderTitle = styled.h1`
 
 export const Content = styled(Col)`
   min-height: 77vh;
+  width: 100%;
+  border: 1px solid red;
+  display: flex;
+  justify-content: center;
 `;
 
 export const Column = styled(Col)`
@@ -38,12 +42,10 @@ export const Wrapper = styled.div`
   padding: 12px;
 `;
 
-export async function handleSubmit(values) {
-  let userId = null;
+export async function handleSubmit(values, history) {
   firebase.auth()
           .createUserWithEmailAndPassword(values.email, values.password)
           .then((u) => {
-              console.log('success!!!!! in auth', u.user.uid);
               if(u.user.uid) {
                 // step 1: create the reference
                 const newUserReference = db.collection('users').doc(u.user.uid);
@@ -64,8 +66,8 @@ export async function handleSubmit(values) {
                   currentJobDuration: values.currentJobDuration,
                   dreamJob: values.dreamJob,
 
-                }).then((data) => {
-                  console.log('success in registration!!!!!', data);
+                }).then(() => {
+                  history.push('/')
                 }).catch((error) => {
                   console.log('error: ', error);
                 });
@@ -82,8 +84,7 @@ export async function handleSubmit(values) {
 }
 class RegisterProfile extends Component {
   render() {
-    const { user, history } = this.props;
-    console.log(this.props);
+    const {   history } = this.props;
     return (
       <div>
         <PageHeader>
@@ -103,6 +104,7 @@ class RegisterProfile extends Component {
         <Content>
           <RegisterProfileForm
             submitFunction={handleSubmit}
+            history={history}
           />
         </Content>
       </div>

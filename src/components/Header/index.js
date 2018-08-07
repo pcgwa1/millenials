@@ -109,6 +109,7 @@ export default class Header extends Component {
     this.setState({menu: !this.state.menu});
   }
   render() {
+    const { user } = this.props;
     return (
         <HeaderWrapper between='xs' toggle={this.state.menu} >
           <Col center='xs' xs={4}>
@@ -120,7 +121,8 @@ export default class Header extends Component {
           <Col xs={12} md={4}>
             <ListWrapper toggle={this.state.menu}>
               <Button onClick={() => this.toggle()}><Link to='/'>Home</Link></Button>
-              <Button onClick={() => this.toggle()}><Link to='/join'>Join Millennials</Link></Button>
+              {user ? <Button onClick={() => this.toggle()}><Link to='/profile'>Profile</Link></Button>
+                : <Button onClick={() => this.toggle()}><Link to='/join'>Join Millennials</Link></Button>}
               <Button onClick={() => this.toggle()}><Link to='/podcast'>Podcast</Link></Button>
               <Button onClick={() => this.toggle()}><Link to='/'>Shop</Link></Button>
               <Button onClick={() => this.toggle()}><Link to='/contact'>Contact</Link></Button>

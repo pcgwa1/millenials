@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { FullWidthRow, Column } from '../../components/GridContainer';
 import { Button } from '../../components/Button';
-import { Form, inputField, selectField } from '../../components/Form';
+import { Form, inputField } from '../../components/Form';
 import validate from '../../helpers/validate';
 
 const SectionTitle = styled.h2`
@@ -20,16 +20,10 @@ class RegisterProfileForm extends Component {
     const {
       submitFunction,
       handleSubmit,
-      firstname,
-      lastname,
-      mobileNumber,
-      country,
-      passportNumber,
-      role,
+      history,
     } = this.props;
-    const disable = false;
     return (
-      <Form onSubmit={handleSubmit(values => submitFunction(values))}>
+      <Form onSubmit={handleSubmit(values => submitFunction(values, history))}>
         <FullWidthRow>
           <Column xs={12} md={8}>
             <SectionTitle>
