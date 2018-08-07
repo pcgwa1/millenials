@@ -68,3 +68,32 @@ export const selectField = (props) => {
     </div>
   );
 };
+
+export const TextArea = styled.textarea`
+  outline: none;
+  margin: 12px 0;
+  background: #fff;
+  width: 100%;
+  min-height: 50px;
+`;
+
+export const textArea = (props) => {
+  const {
+    input, type, meta: { touched, error, warning }, label,
+  } = props;
+  return (
+    <div>
+      <Label> {label} </Label>
+      <TextArea {...input} type={type} />
+      {touched && ((error && (
+        <Error>
+          {error}
+        </Error>
+      )) || (warning && (
+        <Error>
+          {warning}
+        </Error>
+      )))}
+    </div>
+  );
+};

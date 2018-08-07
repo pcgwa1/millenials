@@ -16,3 +16,26 @@ export const Button = styled.button`
 `;
 
 export const NavigationButton = Button.withComponent(Link);
+
+export const ActionButton = styled.button`
+    display:inline-block;
+    padding: 18px 28px;
+    margin: 12px 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family:'Roboto',sans-serif;
+    font-weight:600;
+    color:#FFFFFF;
+    background-color:#F5A800;
+    text-align:center;
+    position:relative;
+    cursor: pointer;
+    width: 100%;
+    outline: none;
+    text-transform: uppercase;
+    border: none;
+
+    :active{
+      box-shadow:inset 0 0.6em 2em -0.3em rgba(0,0,0,0.15),inset 0 0 0em 0.05em rgba(255,255,255,0.12);
+    }
+`;

@@ -9,6 +9,7 @@ import Application from './App';
 import createStore from './Store';
 import theme from './theme';
 import './index.css';
+import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
 import registerServiceWorker from './registerServiceWorker';
 
 const initialState = {};

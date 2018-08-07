@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { Row, Col } from 'react-flexbox-grid';
 import Logo from '../../assets/logo/M-Logo2-stroke-300dpi.png';
 import Hamburger from './Hamburger'
+import firebase from '../../firebaseConfig';
 
 const Button = styled.li`
     display: flex;
@@ -97,6 +98,24 @@ const HamburgerCol = styled(Col)`
   }
 `;
 
+const ActionButton = styled.button`
+  border: none;
+  background: #000;
+  color: #fff;
+  padding: 0 18px;
+  border-radius: 15px;
+  cursor: pointer;
+  outline: none;
+  
+  a {
+    text-decoration: none;
+    color: #fff;
+  }
+`;
+
+function logout() {
+  firebase.auth().signOut();
+}
 export default class Header extends Component {
   constructor(props) {
     super(props);
@@ -120,12 +139,15 @@ export default class Header extends Component {
           </HamburgerCol>
           <Col xs={12} md={4}>
             <ListWrapper toggle={this.state.menu}>
-              <Button onClick={() => this.toggle()}><Link to='/'>Home</Link></Button>
+              {user ? <Button onClick={() => this.toggle()}><Link to='/news'>News Feed</Link></Button>
+                : <Button onClick={() => this.toggle()}><Link to='/'>Home</Link></Button>}
               {user ? <Button onClick={() => this.toggle()}><Link to='/profile'>Profile</Link></Button>
                 : <Button onClick={() => this.toggle()}><Link to='/join'>Join Millennials</Link></Button>}
               <Button onClick={() => this.toggle()}><Link to='/podcast'>Podcast</Link></Button>
               <Button onClick={() => this.toggle()}><Link to='/'>Shop</Link></Button>
               <Button onClick={() => this.toggle()}><Link to='/contact'>Contact</Link></Button>
+              {user ? <ActionButton onClick={() => logout()}>Logout</ActionButton>
+                : <ActionButton onClick={() => this.toggle()}><Link to='/login'>Login</Link></ActionButton>}
             </ListWrapper>
           </Col>
         </HeaderWrapper>
