@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import Typist from 'react-typist';
-import ReactPlayer from 'react-player';
 import { Zoom } from 'react-reveal';
 import { Link } from 'react-router-dom';
-import Logo from '../../assets/logo/iconApp.png';
 
 const MainIntro = styled.h1`
   font-family: ${props => props.theme.fonts.openSansSemiBold};
   font-weight: 800;
   font-size: 88px;
-  color: #ffffff
-  width: 90%;
+  color: #ffffff;
+  width: 100%;
   text-shadow: 2px 2px #000;
+
+  ${props => props.theme.breakpoints.maxTablet} {
+    font-size: 30px;
+  }
 `;
 
 const Wrapper = styled.div`
@@ -27,29 +29,30 @@ const JoinButton = styled(Link)`
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid black;
-  background: white;
-  font-family: ${props => props.theme.fonts.openSansSemiBold};
-  font-weight: 800;
-  font-size: 20px;
-  color: #000;
-  width: 300px;
+  padding: 12px;
+  border-radius: 0.2em;
+  box-sizing: border-box;
   text-decoration: none;
-  margin-top: 50%;
-	border-radius: 10px;
-	cursor:pointer;
-	font-family: Arial;
-	text-decoration: none;
-	text-shadow:0px 1px 0px #000;
-	padding: 10px 12px;
-	
+  font-family: 'Roboto',sans-serif;
+  font-weight: 400;
+  color: #FFFFFF;
+  box-shadow: inset 0 -0.6em 1em -0.35em rgba(0,0,0,0.17),inset 0 0.6em 2em -0.3em rgba(255,255,255,0.15),inset 0 0 0em 0.05em rgba(255,255,255,0.12);
+  text-align: center;
   position: relative;
+  cursor: pointer;
+  font-size: 45px;
+  margin-top: 50%;
+  
+  ${props => props.theme.breakpoints.maxTablet} {
+    font-size: 25px;
+    margin-top: 30%;
+  }
+  
   top: 0;
-  background: rgba( 255, 255, 255, 1 );
-  box-shadow: 1px 1px 1px rgba( 0, 0, 0, 0.1 );
+  background: rgba( 0, 0, 0, 1 );
   transform: translateZ(0);
   transition: all 0.2s ease;
-
+  
 :hover {
   top: -10px;
   box-shadow: 5px 10px 10px rgba( 0, 0, 0, 0.2 );
@@ -83,6 +86,7 @@ export default class MyComponent extends Component {
         </Typist>
           <Zoom>
             <JoinButton to='/join'>
+              <span style={{fontSize: '1.3em', fontFamily:'Comic Sans MS', borderRight: '1px solid rgba(255,255,255,0.5)', paddingRight:'0.3em', marginRight: '0.3em', verticalAlign: 'middle'}}>J</span>
               Join Private Group
             </JoinButton>
           </Zoom>

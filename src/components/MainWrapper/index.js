@@ -15,7 +15,6 @@ export const MainWrapper = styled.div`
           "footer";
           
   ${props => props.theme.breakpoints.tablet} {
-    height: 100vh;
     grid-template-columns: 1fr;
     grid-template-areas:
             "header "
@@ -36,11 +35,16 @@ export const HeaderWrapper = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  
   height: 80px;
   background: rgba(0,0,0,0.5);
   color: white;
   box-shadow: 0 1px 1px 0 rgba(0,0,0,0.17);
   padding: 0 18px;
+  
+    ${props => props.theme.breakpoints.maxTablet} {
+        flex-direction: column;
+  }
 `;
 
 export const Navbar = styled.nav`
@@ -63,7 +67,6 @@ export const Navbar = styled.nav`
 export const Content = styled.article`
    grid-area: content;
    padding: 0 0;
-   height: 100%;
    > ul {
       list-style: none;
       margin: 0;
@@ -94,9 +97,17 @@ export const Advert = styled.div`
 `;
 
 export const Footer = styled.footer`
-   grid-area: footer;
+   left: 0;
+   right: 0;
+   bottom: 0;
    background: black;
-   height: 80px;
+   height: 40px;
+   padding: 18px;
+   color: #ffffff;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   border-top: 1px solid grey;
    
    > ul {
       list-style: none;

@@ -1,12 +1,10 @@
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import { Row, Col } from 'react-flexbox-grid';
-import { Parallax } from 'react-parallax';
-import ParallaxIntro from '../../components/Parallax';
 import { DefaultPlayer as Video } from 'react-html5video';
 import 'react-html5video/dist/styles.css';
 import Logo from '../../assets/video/logo.mp4';
-import Image1 from '../../assets/images/graffiti.jpg';
+import {Link} from "react-router-dom";
 
 export const PageHeader = styled(Col)`
   width: 100vw;
@@ -20,6 +18,8 @@ export const Content = styled(Col)`
 
 export const FullRow = styled(Row)`
   height: 100%;
+  margin: 0;
+  padding: 0;
 `;
 
 export const Column = styled(Col)`
@@ -38,7 +38,7 @@ const Panel = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  height: 50vh;
+  //height: 50vh;
   background: transparent;
   width: 100%;
 `;
@@ -51,26 +51,27 @@ const Inner = styled.div`
   height: 40vh;
   background: rgba(255,255,255,0.75);
   width: 100%;
-   box-shadow: 2px 4px 6px 1px rgba( 0, 0, 0, 0.5);
 `;
 
 const Paragraph = styled.p`
   text-align: center;
-  padding: 0 15%;
-  font-weight: 600;
-  
-  ${props => props.theme.breakpoints.maxTablet} {
-    text-align: justify;
-    padding: 0 5%;
+  padding: 0 25%;
+   font-size: 38px;
+  //font-weight: 600;
+      ${props => props.theme.breakpoints.maxTablet} {
+     font-size: 18px;
+     text-align: justify;
+      padding: 0 5%;
+     
   }
 `;
 
 const MainIntro = styled.h1`
   font-family: ${props => props.theme.fonts.openSansSemiBold};
   font-weight: 800;
-  font-size: 88px;
+  font-size: 58px;
   color: black;
-  padding: 0;
+  padding: 0 12px;
   margin: 0;
   text-shadow: 4px 4px #fff;
   
@@ -80,19 +81,31 @@ const MainIntro = styled.h1`
   }
   
     ${props => props.theme.breakpoints.maxTablet} {
-     font-size: 44px;
+     font-size: 20px;
   }
 `;
 
-const PanelParallax = styled(Parallax)`
-  width: 50vw;
-  height: 50vh;
+const Button = styled(Link)`
+  display: inline-block;
+  padding: 0.7em 1.7em;
+  margin: 18px 0.3em 0.3em 0;
+  border-radius: 0.2em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: 'Roboto',sans-serif;
+  font-weight: 400;
+  color: #FFFFFF;
+  background-color: #3369ff;
+  box-shadow: inset 0 -0.6em 1em -0.35em rgba(0,0,0,0.17),inset 0 0.6em 2em -0.3em rgba(255,255,255,0.15),inset 0 0 0em 0.05em rgba(255,255,255,0.12);
+  text-align: center;
+  position: relative;
+  cursor: pointer;
   
   ${props => props.theme.breakpoints.maxTablet} {
-    width: 100vw;
-    height: 40vh;
-  }
+        margin: 0.3em 1.5em;
+      }
 `;
+
 
 class Home extends PureComponent {
   constructor(props){
@@ -106,11 +119,8 @@ class Home extends PureComponent {
   }
   render() {
     return (
-      <Row>
-        <PageHeader xs={12}>
-          <ParallaxIntro />
-        </PageHeader>
-        <ColumnBlack xs={12} md={6}>
+      <FullRow>
+        <ColumnBlack xs={12}>
           <Video autoPlay
                  controls={[]}
                  style={{width: '100%', margin: '0'}}
@@ -121,39 +131,34 @@ class Home extends PureComponent {
             <source src={Logo} type="video/webm" />
           </Video>
         </ColumnBlack>
-        <Column center='xs' xs={12}  md={6}>
+        <Column center='xs' xs={12} >
           <Panel>
             <Inner>
-              <MainIntro>Who are we<span>?</span></MainIntro>
-              <Paragraph>Millenials is an active online community curated to help creators of any type be better versions of themselves.
-              It was created to expand our limits as creators, help push each other, share techniques, receive honest feedback on projects,
-              network and a space for people to collaborate with each other.
+              <MainIntro>STEP 1: IMPORTANT NOTICE</MainIntro>
+              <Paragraph>
+                ****IMPORTANT: WHEN YOU COMPLETE THE FORM, PLEASE CHECK YOUR EMAIL ASAP! THE EMAIL SUBJECT
+                WILL BE, 'MILLENNIALS SIGN UP, PLEASE CONFIRM THE SUBSCRIPTION'. MAKE SURE TO CLICK CONFIRM!!!
               </Paragraph>
             </Inner>
           </Panel>
         </Column>
-        <Column center='xs' xs={12}  md={6}>
+        <ColumnBlack center='xs' xs={12} >
           <Panel>
             <Inner>
-              <MainIntro>Who are we<span>?</span></MainIntro>
-              <Paragraph>Millenials is an active online community curated to help creators of any type be better versions of themselves.
+              <MainIntro>STEP 2: FILL OUT THE CREATOR FORM</MainIntro>
+              <Paragraph>
+                Millenials is an active online community curated to help creators of any type be better versions of themselves.
                 It was created to expand our limits as creators, help push each other, share techniques, receive honest feedback on projects,
                 network and a space for people to collaborate with each other.
               </Paragraph>
             </Inner>
+            <Button to='/signup' style={{backgroundColor:'#000'}}>
+              <span style={{fontSize: '3em', fontFamily:'Comic Sans MS', borderRight: '1px solid rgba(255,255,255,0.5)', paddingRight:'0.3em', marginRight: '0.3em', verticalAlign: 'middle'}}>M</span>
+              Join Millennials form
+            </Button>
           </Panel>
-        </Column>
-        <ColumnBlack center='xs' xs={12}  md={6}>
-          <Parallax
-            blur={0}
-            bgImage={Image1}
-            bgImageAlt="Millennial Generation"
-            strength={300}
-          >
-          <PanelParallax />
-          </Parallax>
         </ColumnBlack>
-      </Row>
+      </FullRow>
     );
   }
 }
