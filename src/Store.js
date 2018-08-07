@@ -3,6 +3,7 @@ import {
 } from 'redux';
 import { reducer as reduxFormReducer } from 'redux-form';
 import thunk from 'redux-thunk';
+import { reducer as toastrReducer } from 'react-redux-toastr';
 import { reactReduxFirebase, firebaseReducer } from 'react-redux-firebase';
 import { persistStore, persistReducer } from 'redux-persist';
 import localStorage from 'redux-persist/lib/storage';
@@ -12,6 +13,7 @@ import 'firebase/database';
 import firebaseInit from './firebaseConfig';
 import app from './reducer';
 import profile from './containers/Profile/reducer';
+import logbook from './containers/Logbook/reducer';
 
 const persistConfig = {
   key: 'root',
@@ -32,8 +34,10 @@ export default (initialState = {}) => {
       firebaseReducer,
     ),
     form: reduxFormReducer,
+    toastr: toastrReducer,
     app,
     profile,
+    logbook,
   });
 
   const persistedReducer = persistReducer(persistConfig, rootReducer);

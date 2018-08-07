@@ -108,7 +108,7 @@ export const Footer = styled.footer`
    align-items: center;
    justify-content: center;
    border-top: 1px solid grey;
-   
+   position: absolute;
    > ul {
       list-style: none;
       margin: 0;
