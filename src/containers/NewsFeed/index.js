@@ -7,8 +7,9 @@ import { toastr } from 'react-redux-toastr';
 import { Row, Col } from 'react-flexbox-grid';
 import { Link } from 'react-router-dom';
 import { db } from '../../firebaseConfig';
-import { setUserProfile, setUserEvents } from './actions';
+import { setUserEvents } from './actions';
 import CreateEventForm from './Form';
+import Button from '@material-ui/core/Button';
 
 export const PageHeader = styled(Col)`
   max-width: 100vw;
@@ -31,30 +32,15 @@ export const Wrapper = styled.div`
   padding: 12px;
 `;
 
-export const FullWidthRow = styled(Row)`
-  width: 100%;
-`;
-
 export const LogList = styled.div`
   padding: 0;
   margin: 0;
   list-style: none;
 `;
 
-export const TitleRow = styled(Row)`
-    margin-top: 3vh;
-`;
-
-export const PageTitle = styled.h1`
-    margin: 0;
-    padding: 6px 12px;
-    font-family:'Roboto',sans-serif;
-    font-weight:600;
-`;
-
 export const ContentRow = styled(Row)`
     padding: 0 12px;
-    min-height: 85vh;
+
 `;
 
 export const ContentWrapper = styled.div`
@@ -68,49 +54,15 @@ export const ListItem = styled(Link)`
 `;
 
 export const ListItemWrapper = styled.div`
-  padding: 0;
+  padding: 18px;
   margin: 16px 0;
-  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  border-radius: 10px;
-`;
-
-export const ListContentWrapper = styled.div`
-  padding: 0 12px;
-`;
-
-export const ListItemTop = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
-export const ListItemDate = styled.p`
-  text-transform: capitalize;
-  font-size: 12px;
-`;
-
-export const ListItemCategory = styled.p`
-  text-transform: uppercase;
-  font-size: 12px;
-  padding: 12px;
-  background: ${props => (props.category === 'Theatre' ? props.theme.colors.redAlert : props.category === 'Ward' ? props.theme.colors.blue : props.theme.colors.lawngreen)};
-  font-weight: bold;
-  color: #fff;
-  border-radius: 0 0 10px 10px;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.19);
 `;
 
 export const ListItemTitle = styled.h4`
   margin: 0;
   padding: 0;
-`;
-
-export const LinkWrapper = styled(Link)`
-  margin: 0;
-  padding: 0;
-  cursor: pointer;
-  svg {
-    fill: #fff;
-    width: 28px;
-  }
+  text-align: left;
 `;
 
 export const FeedWrapper = styled.div`
@@ -121,6 +73,14 @@ export const FeedWrapper = styled.div`
   
 `;
 
+export const PageWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 10vh;
+  
+`;
 export function handleSubmit(values, user, history) {
   // step 1: create the reference
   const timeStamp = new Date().getTime();
@@ -141,11 +101,11 @@ export function handleSubmit(values, user, history) {
 }
 
 function renderLogs(userEvents, initializeForm, user, history) {
-  if (!userEvents) return <FeedWrapper><h1>No feed yet</h1><CreateEventForm user={user} submitFunction={handleSubmit} history={history} /></FeedWrapper>;
+  if (!userEvents.length) return <FeedWrapper><h1>No feed yet</h1></FeedWrapper>;
   return (
     <ContentWrapper>
-      <ContentRow start='xs'>
-        <Column xs={12} md={3}>
+      <ContentRow start='xs' center='md'>
+        <Column xs={12} md={2}>
           <LogList>
             {userEvents.map((event) => {
               const {
@@ -154,13 +114,14 @@ function renderLogs(userEvents, initializeForm, user, history) {
               const dateTime = new Date(timestamp);
               const formatDate = moment(dateTime).format('DD MMMM YYYY');
               return (
-                <ListItem to='/update' key={id} onClick={() => initializeForm(event)}>
+                <ListItem to='/post' key={id} onClick={() => initializeForm(event)}>
                   <ListItemWrapper>
-                    <ListContentWrapper>
-                      <ListItemTitle>
-                        {post}
-                      </ListItemTitle>
-                    </ListContentWrapper>
+                    <ListItemTitle>
+                      <p>
+                        {formatDate}
+                      </p>
+                      {post}
+                    </ListItemTitle>
                   </ListItemWrapper>
                 </ListItem>
               );
@@ -200,9 +161,10 @@ class Logbook extends Component {
   render() {
     const { user, userEvents, initializeForm, history } = this.props;
     return (
-      <div>
+      <PageWrapper>
+        <CreateEventForm user={user} submitFunction={handleSubmit} history={history} />
         {renderLogs(userEvents, initializeForm, user, history)}
-      </div>
+      </PageWrapper>
     );
   }
 }

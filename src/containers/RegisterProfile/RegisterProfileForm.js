@@ -88,6 +88,16 @@ class RegisterProfileForm extends Component {
           </Column>
         </FullWidthRow>
         <FullWidthRow>
+          <Column xs={12} md={8}>
+            <SectionTitle>
+              BIOGRAPHY
+            </SectionTitle>
+          </Column>
+          <Column xs={12} md={8}>
+            <Field name='biography' type='text' placeholder='Biography*' component='textArea' />
+          </Column>
+        </FullWidthRow>
+        <FullWidthRow>
           <Column xs={12}>
             <Button type='submit' >
               Submit Information

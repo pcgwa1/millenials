@@ -36,20 +36,18 @@ class CreateLogForm extends Component {
     } = this.props;
     const disable = !(post);
     return (
-      <Wrapper>
-        <Form onSubmit={handleSubmit(values => submitFunction(values, user, history))}>
-          <FullWidthRow>
-            <Column xs={12}>
-              <Field name='post' type='text' label='Add Post' component={textArea} />
-            </Column>
-          </FullWidthRow>
-          <FullWidthRow>
-            <Column xs={12}>
-              <ActionButton label='Save' type='submit' disabled={disable} />
-            </Column>
-          </FullWidthRow>
-        </Form>
-      </Wrapper>
+      <Form onSubmit={handleSubmit(values => submitFunction(values, user, history))}>
+        <FullWidthRow center='md'>
+          <Column xs={12} md={4}>
+            <Field name='post' type='text' label='Add Post' component={textArea} />
+          </Column>
+        </FullWidthRow>
+        <FullWidthRow center='md'>
+          <Column xs={12} md={4}>
+            <ActionButton label='Save' type='submit' disabled={disable} />
+          </Column>
+        </FullWidthRow>
+      </Form>
     );
   }
 }

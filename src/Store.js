@@ -13,7 +13,7 @@ import 'firebase/database';
 import firebaseInit from './firebaseConfig';
 import app from './reducer';
 import profile from './containers/Profile/reducer';
-import logbook from './containers/Logbook/reducer';
+import logbook from './containers/NewsFeed/reducer';
 
 const persistConfig = {
   key: 'root',

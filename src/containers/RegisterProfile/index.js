@@ -64,6 +64,7 @@ export async function handleSubmit(values, history) {
                   studies: values.studies,
                   currentJob: values.currentJob,
                   currentJobDuration: values.currentJobDuration,
+                  biography: values.biography,
                   dreamJob: values.dreamJob,
 
                 }).then(() => {

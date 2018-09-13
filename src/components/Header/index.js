@@ -137,9 +137,9 @@ export default class Header extends Component {
           <HamburgerCol center='xs' xs={2}>
             <Hamburger menu={this.state.menu} toggleMenu={this.toggle} />
           </HamburgerCol>
-          <Col xs={12} md={4}>
+          <Col xs={12} md={5}>
             <ListWrapper toggle={this.state.menu}>
-              {user ? <Button onClick={() => this.toggle()}><Link to='/news'>News Feed</Link></Button>
+              {user ? <Button onClick={() => this.toggle()}><Link to='/news'>Feed</Link></Button>
                 : <Button onClick={() => this.toggle()}><Link to='/'>Home</Link></Button>}
               {user ? <Button onClick={() => this.toggle()}><Link to='/profile'>Profile</Link></Button>
                 : <Button onClick={() => this.toggle()}><Link to='/join'>Join Millennials</Link></Button>}

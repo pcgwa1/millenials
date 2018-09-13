@@ -16,8 +16,7 @@ const Profile = asyncComponent(() => import('./containers/Profile'));
 const JoinGroupIntro = asyncComponent(() => import('./containers/JoinGroupIntro'));
 const Login = asyncComponent(() => import('./containers/Login'));
 const RegisterProfile = asyncComponent(() => import('./containers/RegisterProfile'));
-const NewsFeed = asyncComponent(() => import('./containers/Logbook'));
-const LogbookCreate = asyncComponent(() => import('./containers/LogbookCreate'));
+const NewsFeed = asyncComponent(() => import('./containers/NewsFeed'));
 const Contact = asyncComponent(() => import('./containers/Contact'));
 
 class App extends Component {
@@ -64,7 +63,6 @@ class App extends Component {
               <Route exact path='/profile' component={() => <Profile user={user} />} />
               <Route exact path='/podcast' component={Podcast} />
               <Route exact path='/news' component={() => <NewsFeed user={user} />} />
-              <Route exact path='/create' component={() => <LogbookCreate user={user} />} />
               <Route exact path='/contact' component={Contact} />
             </Switch>
             <Footer />
